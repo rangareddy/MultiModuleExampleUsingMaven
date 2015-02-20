@@ -12,7 +12,7 @@
   		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 	
 	<context:component-scan base-package="com.varasofttech.controller, com.varasofttech.service, com.varasofttech.dao" />	
-	<context:property-placeholder location="classpath:hibernate.properties" />
+	<context:property-placeholder location="classpath:hiberante.properties" />
 	
 	<mvc:annotation-driven />
 	<mvc:resources mapping="/resources/**" location="/resources/" />
@@ -21,23 +21,24 @@
 		destroy-method="close">
 		
 		<!-- access -->
-		<property name="driverClass" value="${hibernate.driverClass}" />
-		<property name="jdbcUrl" value="${hibernate.url}" />
-		<property name="user" value="${hibernate.username}" />
-		<property name="password" value="${hibernate.password}" />
+		<property name="driverClass" value="${database.driverClass}" />
+		<property name="jdbcUrl" value="${database.url}" />
+		<property name="user" value="${database.username}" />
+		<property name="password" value="${database.password}" />
 		
 		<!-- pool sizing -->
-		<property name="initialPoolSize" value="${hibernate.initialPoolSize}" />
-		<property name="maxPoolSize" value="${hibernate.maxPoolSize}" />
-		<property name="minPoolSize" value="${hibernate.minPoolSize}" />
-		<property name="maxStatements" value="${hibernate.maxStatements}" />
+		<property name="initialPoolSize" value="${connection.initialPoolSize}" />
+		<property name="maxPoolSize" value="${connection.maxPoolSize}" />
+		<property name="minPoolSize" value="${connection.minPoolSize}" />
+		<property name="maxStatements" value="${connection.maxStatements}" />
+		<property name="acquireIncrement" value="${connection.acquireIncrement}" />			
 		
 		<!-- timeouts and testing -->
-		<property name="testConnectionOnCheckout" value="${hibernate.testConnection}" />
+		<property name="testConnectionOnCheckout" value="${connection.testConnection}" />
 		
 		<!-- refreshing connections -->
-		<property name="maxIdleTime" value="${hibernate.maxIdleTime}" /> <!-- 3min -->
-		<property name="maxConnectionAge" value="${hibernate.maxConnectionAge}" /> <!-- 1h -->		
+		<property name="maxIdleTime" value="${connection.maxIdleTime}" />
+		<property name="maxConnectionAge" value="${connection.maxConnectionAge}" /> 		
 	</bean>	
 
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
